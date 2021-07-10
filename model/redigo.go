@@ -1,7 +1,6 @@
-package pkg
+package model
 
 import (
-    "github.com/Jundong-chan/seckill/model"
 	"errors"
 	"fmt"
 	"log"

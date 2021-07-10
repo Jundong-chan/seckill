@@ -9,6 +9,7 @@ import (
 	"github.com/Jundong-chan/seckill/transport"
 	"net/http"
 	_ "net/http/pprof"
+	"seckill/pkg"
 )
 
 func main() {
@@ -26,7 +27,7 @@ func main() {
 	)
 	//初始化
 	flag.Parse() //解析命令行参数
-	mysql.Init(*mysqluser, *mysqlpassword, *mysqlhost, *mysqlport, *mysqlschema)
+	pkg.Init(*mysqluser, *mysqlpassword, *mysqlhost, *mysqlport, *mysqlschema)
 	redisclient.RedisInit(*RedisAddr) //连接redis和更新mysql数据到redis
 
 	var redishandle = service.RedisHandleServiceimpl{}

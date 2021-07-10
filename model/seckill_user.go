@@ -2,7 +2,6 @@ package model
 
 import (
 	"github.com/Jundong-chan/seckill/pkg"
-	"github.com/Jundong-chan/seckill/mysql"
 	"errors"
 	"fmt"
 	"log"
@@ -35,7 +34,7 @@ func (umodel *Usermodel) getTableName() string {
 }
 
 func (umodel *Usermodel) GetUserList() ([]gorose.Data, error) {
-	conn := mysql.DB()
+	conn := pkg.DB()
 	list, err := conn.Table(umodel.getTableName()).Get()
 	if err != nil {
 		log.Printf("GetUserList Error:%v", err)
@@ -45,7 +44,7 @@ func (umodel *Usermodel) GetUserList() ([]gorose.Data, error) {
 }
 
 func (umodel *Usermodel) CreateUser(user *User) (err error) {
-	conn := mysql.DB()
+	conn := pkg.DB()
 	//生成全局唯一ID
 	user.UserId = xid.New().String()
 	user.CreateTime = time.Now().Format("2006-01-02 15:04:05")
@@ -75,7 +74,7 @@ func (umodel *Usermodel) QureyUserByCondition(field string, condition string, va
 	if condition == "" {
 		condition = "="
 	}
-	conn := mysql.DB()
+	conn := pkg.DB()
 	result, err := conn.Table(umodel.getTableName()).Where(field, condition, value).Get()
 	if err != nil {
 		log.Printf("QureyUserByCondition Error:%v", err)
@@ -87,7 +86,7 @@ func (umodel *Usermodel) QureyUserByCondition(field string, condition string, va
 
 //传入 用户登陆的字段，用户登陆使用的用户名以及密码，验证用户，正确则返回用户的信息
 func (umodel *Usermodel) CheckUser(field string, username string, password string) ([]gorose.Data, error) {
-	conn := mysql.DB()
+	conn := pkg.DB()
 	var user []gorose.Data
 	fmt.Println("field", field)
 	fmt.Println("username", username)
@@ -109,7 +108,7 @@ func (umodel *Usermodel) CheckUser(field string, username string, password strin
 
 //判断用户是否存在
 func (umodel *Usermodel) CheckUserId(userid string) error {
-	conn := mysql.DB()
+	conn := pkg.DB()
 	user, err := conn.Table(umodel.getTableName()).Where("user_id", userid).Get()
 	if err != nil {
 		return errors.New("wrong User Account")

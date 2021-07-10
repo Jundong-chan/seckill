@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/Jundong-chan/seckill/mysql"
+	"github.com/Jundong-chan/seckill/pkg"
 	"errors"
 	"fmt"
 	"log"
@@ -40,7 +40,7 @@ func (pmodel *Productmodel) getTableName() string {
 }
 
 func (pmodel *Productmodel) GetProductList() ([]gorose.Data, error) {
-	list, err := mysql.DB().Table(pmodel.getTableName()).Get()
+	list, err := pkg.DB().Table(pmodel.getTableName()).Get()
 	if err != nil {
 		log.Printf("GetProductList error:%v", err)
 		return nil, err
@@ -49,7 +49,7 @@ func (pmodel *Productmodel) GetProductList() ([]gorose.Data, error) {
 }
 
 func (pmodel *Productmodel) GetSecProductInfo() ([]gorose.Data, error) {
-	conn := mysql.DB()
+	conn := pkg.DB()
 	list, err := conn.Table(pmodel.getTableName()).Where("status", 1).Get()
 	if err != nil {
 		log.Printf("GetSecProductInfo error:%v", err)
@@ -59,7 +59,7 @@ func (pmodel *Productmodel) GetSecProductInfo() ([]gorose.Data, error) {
 }
 
 func (pmodel *Productmodel) CreateProduct(p *Product) error {
-	conn := mysql.DB()
+	conn := pkg.DB()
 	p.CreateTime = time.Now().Format("2006-01-02 15:04:05")
 	p.UpdateTime = time.Now().Format("2006-01-02 15:04:05")
 
@@ -97,7 +97,7 @@ func (pmodel *Productmodel) CreateProduct(p *Product) error {
 
 //删除 商品
 func (pmodel *Productmodel) DeleteProduct(id string) error {
-	conn := mysql.DB()
+	conn := pkg.DB()
 	ID, _ := strconv.Atoi(id)
 	_, err := conn.Table(pmodel.getTableName()).Where("product_id", ID).Delete()
 	if err != nil {
@@ -108,7 +108,7 @@ func (pmodel *Productmodel) DeleteProduct(id string) error {
 
 //修改商品的个别信息
 func (pmodel *Productmodel) ModifyProductByCondition(data map[string]interface{}, condition string, mes interface{}) error {
-	conn := mysql.DB()
+	conn := pkg.DB()
 	UpdateTime := time.Now().Format("2006-01-02 15:04:05")
 	data["update_time"] = UpdateTime
 	fmt.Println("update data is :", data)
@@ -122,7 +122,7 @@ func (pmodel *Productmodel) ModifyProductByCondition(data map[string]interface{}
 
 //修改,秒杀商品的信息
 func (pmodel *Productmodel) ModifyProduct(p *Product) error {
-	conn := mysql.DB()
+	conn := pkg.DB()
 	p.UpdateTime = time.Now().Format("2006-01-02 15:04:05")
 	//将前端设置的商品秒杀时间戳转成 日期格式
 	secstart, err1 := strconv.Atoi(p.SecstartTime)
@@ -156,7 +156,7 @@ func (pmodel *Productmodel) QureyProductByUserId(feild string, condition string,
 	if condition == "" {
 		condition = "="
 	}
-	conn := mysql.DB()
+	conn := pkg.DB()
 	fmt.Println("feild:", feild, "condition", condition, "value", value)
 	result, err := conn.Table(pmodel.getTableName()).Where(feild, condition, value).Get()
 	if err != nil {

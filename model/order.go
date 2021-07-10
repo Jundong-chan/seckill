@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/Jundong-chan/seckill/mysql"
+	"github.com/Jundong-chan/seckill/pkg"
 	"errors"
 	"fmt"
 	"math"
@@ -37,7 +37,7 @@ func (svc *Ordermodel) getTableName() string {
 }
 
 func (svc *Ordermodel) CreateOrder(order Order) error {
-	conn := mysql.DB()
+	conn := pkg.DB()
 	s1 := rand.NewSource(time.Now().Unix())
 	s2 := rand.New(s1)
 	ran := strconv.Itoa(s2.Intn(1000) + 1000) //产生一个1000~2000的随机数
@@ -83,7 +83,7 @@ func (svc *Ordermodel) QureyOrderByConndition(field string, condition string, va
 	if condition == "" {
 		condition = ""
 	}
-	conn := mysql.DB()
+	conn := pkg.DB()
 	data, err := conn.Table(svc.getTableName()).Where(field, condition, value).Get()
 	if err != nil {
 		return nil, errors.New("qurey order failed :" + err.Error())
@@ -93,7 +93,7 @@ func (svc *Ordermodel) QureyOrderByConndition(field string, condition string, va
 
 //将需要修改的字段和值放进map , 根据查询条件 field=value时
 func (svc *Ordermodel) ModifyOrderByfield(data map[string]interface{}, field string, value interface{}) error {
-	conn := mysql.DB()
+	conn := pkg.DB()
 	data["update_time"] = time.Now().Format("2006-01-02 15:04:05")
 	_, err := conn.Table(svc.getTableName()).Data(data).Where(field, value).Update()
 	if err != nil {
@@ -103,7 +103,7 @@ func (svc *Ordermodel) ModifyOrderByfield(data map[string]interface{}, field str
 }
 
 func (svc *Ordermodel) QureyOrderlist() ([]gorose.Data, error) {
-	conn := mysql.DB()
+	conn := pkg.DB()
 	data, err := conn.Table(svc.getTableName()).Get()
 	if err != nil {
 		return nil, errors.New("QureyOrderlist failed :" + err.Error())

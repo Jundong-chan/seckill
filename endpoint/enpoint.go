@@ -2,8 +2,8 @@ package endpoint
 
 import (
 	"github.com/Jundong-chan/seckill/config"
-	"CommoditySpike/server/seckillcore/pkg/redis"
-	"CommoditySpike/server/seckillcore/service"
+	"github.com/Jundong-chan/seckill/pkg"
+	"github.com/Jundong-chan/seckill/service"
 	"context"
 	"errors"
 	"time"

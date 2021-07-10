@@ -2,9 +2,9 @@ package service
 
 //秒杀核心服务
 import (
-	"CommoditySpike/server/seckillcore/config"
-	"CommoditySpike/server/seckillcore/model"
-	"CommoditySpike/server/seckillcore/pkg/redis"
+	"github.com/Jundong-chan/seckill/cofig"
+	"github.com/Jundong-chan/seckill/model"
+	"github.com/Jundong-chan/seckill/pkg"
 	"errors"
 	"fmt"
 	"log"

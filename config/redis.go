@@ -1,7 +1,7 @@
 package config
 
 import (
-	"CommoditySpike/server/seckillcore/model"
+	"github.com/Jundong-chan/seckill/model"
 	"sync"
 )
 

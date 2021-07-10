@@ -1,7 +1,7 @@
 package service
 import (
-	"CommoditySpike/server/seckillcore/config"
-	"CommoditySpike/server/seckillcore/pkg/redis"
+	"github.com/Jundong-chan/seckill/cofig"
+	"github.com/Jundong-chan/seckill/pkg"
 	"encoding/json"
 	"fmt"
 	"log"

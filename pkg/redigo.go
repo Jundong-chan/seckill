@@ -1,7 +1,7 @@
 package pkg
 
 import (
-	"CommoditySpike/server/seckillcore/model"
+    "github.com/Jundong-chan/seckill/model"
 	"errors"
 	"fmt"
 	"log"

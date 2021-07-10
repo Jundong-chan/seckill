@@ -1,8 +1,8 @@
 package service
 
 import (
-	"CommoditySpike/server/seckillcore/model"
-	"CommoditySpike/server/seckillcore/plugins"
+	"github.com/Jundong-chan/seckill/model"
+	"github.com/Jundong-chan/seckill/plugins"
 	"fmt"
 	"sync"
 )

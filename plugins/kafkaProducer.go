@@ -1,7 +1,7 @@
 package plugins
 
 import (
-"CommoditySpike/server/seckillcore/model"
+	"github.com/Jundong-chan/seckill/model"
 "encoding/json"
 "fmt"
 "log"

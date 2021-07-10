@@ -1,7 +1,7 @@
 package endpoint
 
 import (
-	"CommoditySpike/server/seckillcore/config"
+	"github.com/Jundong-chan/seckill/config"
 	"CommoditySpike/server/seckillcore/pkg/redis"
 	"CommoditySpike/server/seckillcore/service"
 	"context"

@@ -2,8 +2,8 @@ package service
 
 //秒杀核心服务
 import (
-	"../config"
-	"../model"
+	"github.com/Jundong-chan/seckill/config"
+	"github.com/Jundong-chan/seckill/model"
 	"errors"
 	"fmt"
 	"log"

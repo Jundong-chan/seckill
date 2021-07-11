@@ -1,11 +1,11 @@
 package transport
 
 import (
-	"../endpoint"
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/Jundong-chan/seckill/endpoint"
 	"net/http"
 	"strings"
 

@@ -1,13 +1,13 @@
 package plugins
 
 import (
-	"../model"
-"encoding/json"
-"fmt"
-"log"
-"time"
+	"encoding/json"
+	"fmt"
+	"github.com/Jundong-chan/seckill/model"
+	"log"
+	"time"
 
-"github.com/Shopify/sarama"
+	"github.com/Shopify/sarama"
 )
 
 var mas = make(chan sarama.ProducerMessage, 20000) //生成的消息放到chan里

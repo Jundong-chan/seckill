@@ -1,11 +1,11 @@
 package endpoint
 
 import (
-	"../config"
-	"../service"
 	"context"
 	"errors"
-	"seckill/model"
+	"github.com/Jundong-chan/seckill/config"
+	"github.com/Jundong-chan/seckill/model"
+	"github.com/Jundong-chan/seckill/service"
 	"time"
 
 	"github.com/go-kit/kit/endpoint"

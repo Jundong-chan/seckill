@@ -1,9 +1,9 @@
 package plugins
 
 import (
-	"../model"
 	"encoding/json"
 	"fmt"
+	"github.com/Jundong-chan/seckill/model"
 	"sync"
 
 	"github.com/Shopify/sarama"

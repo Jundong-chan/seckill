@@ -1,4 +1,4 @@
-module github.com/Jundongchen/seckill
+module github.com/Jundong-chan/seckill
 
 go 1.16
 

@@ -1,16 +1,16 @@
 package main
 
 import (
-	"./endpoint"
-	"./pkg"
-	"./service"
-	"./transport"
+	"github.com/Jundong-chan/seckill/endpoint"
+	"github.com/Jundong-chan/seckill/pkg"
+	"github.com/Jundong-chan/seckill/service"
+	"github.com/Jundong-chan/seckill/transport"
 	"context"
 	"flag"
 	"fmt"
 	"net/http"
 	_ "net/http/pprof"
-	"./model"
+"github.com/Jundong-chan/seckill/model"
 )
 
 func main() {

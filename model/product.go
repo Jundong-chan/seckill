@@ -1,9 +1,9 @@
 package model
 
 import (
-	"../pkg"
 	"errors"
 	"fmt"
+	"github.com/Jundong-chan/seckill/pkg"
 	"log"
 	"strconv"
 	"time"

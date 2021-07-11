@@ -1,10 +1,10 @@
 package service
 import (
-	"../config"
 	"encoding/json"
 	"fmt"
+	"github.com/Jundong-chan/seckill/config"
+	"github.com/Jundong-chan/seckill/model"
 	"log"
-	"../model"
 	"time"
 
 	"github.com/gomodule/redigo/redis"

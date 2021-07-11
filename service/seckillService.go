@@ -1,11 +1,11 @@
 package service
 import (
-	"../config"
+	"github.com/Jundong-chan/seckill/config"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
-	"../model"
+	"github.com/Jundong-chan/seckill/model"
 	"time"
 
 	"github.com/gomodule/redigo/redis"

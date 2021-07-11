@@ -1,7 +1,7 @@
 package config
 
 import (
-	"../model"
+	"github.com/Jundong-chan/seckill/model"
 	"sync"
 )
 

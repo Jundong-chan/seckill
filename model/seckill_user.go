@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/Jundong-chan/seckill/pkg"
+	"../pkg"
 	"errors"
 	"fmt"
 	"log"
@@ -52,10 +52,10 @@ func (umodel *Usermodel) CreateUser(user *User) (err error) {
 	fmt.Println(user)
 
 	//随机生成5个字节的盐，盐的位数是 字节数*2
-	salt, err := encrypt.NewRandomSalt(5)
+	salt, err := pkg.NewRandomSalt(5)
 	user.Salt = salt
 	//返回加密后的结果
-	user.Password = encrypt.Encryption(user.Password, salt)
+	user.Password = pkg.Encryption(user.Password, salt)
 
 	if err != nil {
 		return err
@@ -99,7 +99,7 @@ func (umodel *Usermodel) CheckUser(field string, username string, password strin
 	if len(user) == 0 {
 		return nil, errors.New("wrong User Account")
 	}
-	iscorrect := encrypt.TestifyEncrypt(password, user[0]["salt"], user[0]["password"])
+	iscorrect := pkg.TestifyEncrypt(password, user[0]["salt"], user[0]["password"])
 	if !iscorrect {
 		return nil, errors.New("wrong password")
 	}

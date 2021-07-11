@@ -1,11 +1,11 @@
 package endpoint
 
 import (
-	"github.com/Jundong-chan/seckill/config"
-	"github.com/Jundong-chan/seckill/pkg"
-	"github.com/Jundong-chan/seckill/service"
+	"../config"
+	"../service"
 	"context"
 	"errors"
+	"seckill/model"
 	"time"
 
 	"github.com/go-kit/kit/endpoint"
@@ -63,7 +63,7 @@ func MakeSeckillServiceEp(svc service.SeckillServiceimpl) endpoint.Endpoint {
 		switch res.Code {
 		case config.Success:
 			err = nil
-			go redisclient.UpdateStorageToBase(res.ProductId) //更新缓存到数据库
+			go model.UpdateStorageToBase(res.ProductId) //更新缓存到数据库
 			return SeckillResponse{
 				ProductId: res.ProductId,
 				UserId:    res.UserId,

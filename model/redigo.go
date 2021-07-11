@@ -39,7 +39,7 @@ func RedisInit(addr string) {
 
 //将所有商品的库存，商品状态，开始时间，结束时间，读取到redis中
 func ReadDataFromMysql() {
-	pm := model.NewProductModel()
+	pm := NewProductModel()
 	data, err := pm.GetProductList() //读取商品信息
 	if err != nil {
 		log.Println("ReadDataFromMysql failed")
@@ -122,7 +122,7 @@ func UpdateStorageToBase(pid string) {
 		"total":  stor,
 		"status": status,
 	}
-	pm := model.NewProductModel()
+	pm := NewProductModel()
 	err = pm.ModifyProductByCondition(data, "product_id", pid)
 	if err != nil {
 		log.Println("failed to write data to mysql ")

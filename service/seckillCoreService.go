@@ -2,9 +2,8 @@ package service
 
 //秒杀核心服务
 import (
-	"github.com/Jundong-chan/seckill/cofig"
-	"github.com/Jundong-chan/seckill/model"
-	"github.com/Jundong-chan/seckill/pkg"
+	"../config"
+	"../model"
 	"errors"
 	"fmt"
 	"log"
@@ -19,10 +18,10 @@ type SeckillCoreServiceimpl struct {
 }
 
 func (svc SeckillCoreServiceimpl) ExecuteSeckill(req *config.SecRequest) (*config.SecResult, error) {
-	conn := redisclient.Pool.Get()
+	conn := model.Pool.Get()
 	defer conn.Close()
 	//判断商品状态
-	status := redisclient.ReadStatus(req.ProductId, conn)
+	status := model.ReadStatus(req.ProductId, conn)
 	if status != 1 {
 		log.Printf("product :%v ,is off the shell", req.ProductId)
 		return &config.SecResult{
@@ -32,7 +31,7 @@ func (svc SeckillCoreServiceimpl) ExecuteSeckill(req *config.SecRequest) (*confi
 		}, errors.New("the product is not on selling")
 	}
 	//判断库存是否可用
-	storage := redisclient.ReadStorage(req.ProductId, conn)
+	storage := model.ReadStorage(req.ProductId, conn)
 	if storage <= 0 || storage < req.BuyNum {
 		log.Printf("product :%v ,is off the shell", req.ProductId)
 		return &config.SecResult{
@@ -42,7 +41,7 @@ func (svc SeckillCoreServiceimpl) ExecuteSeckill(req *config.SecRequest) (*confi
 		}, errors.New("the product is not on selling")
 	}
 	//执行减库存
-	err := redisclient.ChangeStorage(req.ProductId, -req.BuyNum, conn)
+	err := model.ChangeStorage(req.ProductId, -req.BuyNum, conn)
 	if err != nil {
 		return &config.SecResult{
 			ProductId: req.ProductId,

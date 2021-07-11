@@ -1,10 +1,10 @@
 package service
 import (
-	"github.com/Jundong-chan/seckill/cofig"
-	"github.com/Jundong-chan/seckill/pkg"
+	"../config"
 	"encoding/json"
 	"fmt"
 	"log"
+	"../model"
 	"time"
 
 	"github.com/gomodule/redigo/redis"
@@ -41,7 +41,7 @@ func (rhsrv RedisHandleServiceimpl) RunProccess() {
 //读取redis 队列中的请求，推给秒杀接收请求的队列
 func (rhsrv RedisHandleServiceimpl) HandleReader() {
 	fmt.Println("正在读取redis中的请求...")
-	rdb := redisclient.Pool.Get()
+	rdb := model.Pool.Get()
 	defer rdb.Close()
 	for {
 		for {
@@ -115,7 +115,7 @@ func SendToRedis(res *config.SecResult) error {
 		return err
 	}
 
-	rdb := redisclient.Pool.Get()
+	rdb := model.Pool.Get()
 	defer rdb.Close()
 	_, err = rdb.Do("LPush", config.RedisHandleResListName, data)
 	if err != nil {

@@ -1,12 +1,12 @@
 package transport
 
 import (
+	"../endpoint"
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
-	"seckill/endpoint"
 	"strings"
 
 	gokithttp "github.com/go-kit/kit/transport/http"

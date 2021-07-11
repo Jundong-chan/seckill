@@ -1,12 +1,11 @@
 package service
 import (
-	"github.com/Jundong-chan/seckill/cofig"
-	"github.com/Jundong-chan/seckill/pkg"
+	"../config"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
-	"seckill/config"
+	"../model"
 	"time"
 
 	"github.com/gomodule/redigo/redis"
@@ -28,7 +27,7 @@ func (sv SeckillServiceimpl) SecKill(req *config.SecRequest) (interface{}, error
 	//查看用户的资格，购买是否到上限
 	id := req.ProductId + req.UserId
 	fmt.Println("用户请求id", id)
-	limit := redisclient.ReadLimit(req.ProductId)
+	limit := model.ReadLimit(req.ProductId)
 	counts, _ := config.BlackList.Load(id) //查询名单上的购买次数
 	var count int
 	if counts == nil {
@@ -43,10 +42,10 @@ func (sv SeckillServiceimpl) SecKill(req *config.SecRequest) (interface{}, error
 			Code:      config.Buylimit,
 		}, errors.New("you have getting buy limit")
 	}
-	conn := redisclient.Pool.Get()
+	conn := model.Pool.Get()
 	defer conn.Close()
 	//查询商品是否在秒杀
-	status := redisclient.ReadStatus(req.ProductId, conn)
+	status := model.ReadStatus(req.ProductId, conn)
 	if status != 1 {
 		return config.SecResult{
 			ProductId: req.ProductId,
@@ -94,7 +93,7 @@ func (sv SeckillServiceimpl) SecKill(req *config.SecRequest) (interface{}, error
 //一直循环等待将 端点的请求队列的数据放到redis中
 func (sv SeckillServiceimpl) SendSeckillReqEnd() {
 	//fmt.Println("writing request into redis.....")
-	conn := redisclient.Pool.Get()
+	conn := model.Pool.Get()
 	defer conn.Close()
 	for {
 		req := <-config.SecEndContext.SecReqChan
@@ -115,7 +114,7 @@ func (sv SeckillServiceimpl) SendSeckillReqEnd() {
 //将redis队列中的结果取出，放到结果channel
 func (sv SeckillServiceimpl) ReadSeckillResEnd() {
 	//fmt.Println("endpoint :reading result from redis.....")
-	conn := redisclient.Pool.Get()
+	conn := model.Pool.Get()
 	defer conn.Close()
 
 	for {

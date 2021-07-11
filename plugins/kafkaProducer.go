@@ -1,7 +1,7 @@
 package plugins
 
 import (
-	"github.com/Jundong-chan/seckill/model"
+	"../model"
 "encoding/json"
 "fmt"
 "log"

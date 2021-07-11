@@ -1,15 +1,16 @@
 package main
 
 import (
+	"./endpoint"
+	"./pkg"
+	"./service"
+	"./transport"
 	"context"
 	"flag"
 	"fmt"
-	"github.com/Jundong-chan/seckill/endpoint"
-	"github.com/Jundong-chan/seckill/service"
-	"github.com/Jundong-chan/seckill/transport"
 	"net/http"
 	_ "net/http/pprof"
-	"seckill/pkg"
+	"./model"
 )
 
 func main() {
@@ -28,7 +29,7 @@ func main() {
 	//初始化
 	flag.Parse() //解析命令行参数
 	pkg.Init(*mysqluser, *mysqlpassword, *mysqlhost, *mysqlport, *mysqlschema)
-	redisclient.RedisInit(*RedisAddr) //连接redis和更新mysql数据到redis
+	model.RedisInit(*RedisAddr) //连接redis和更新mysql数据到redis
 
 	var redishandle = service.RedisHandleServiceimpl{}
 	go func() {

@@ -1,12 +1,12 @@
 package plugins
 
 import (
-	"github.com/Jundong-chan/seckill/model"
-"encoding/json"
-"fmt"
-"sync"
+	"../model"
+	"encoding/json"
+	"fmt"
+	"sync"
 
-"github.com/Shopify/sarama"
+	"github.com/Shopify/sarama"
 )
 
 var brokeraddr = "localhost:9092"

@@ -2,8 +2,8 @@ package service
 
 import (
 	"fmt"
-	"github.com/Jundong-chan/seckill/model"
-	"github.com/Jundong-chan/seckill/plugins"
+	"../model"
+	"../plugins"
 	"sync"
 )
 
